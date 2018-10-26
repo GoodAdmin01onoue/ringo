@@ -20,4 +20,20 @@ public class LoginServlet extends HttpServlet {
 		rd.forward(request, response);
 
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+		//リクエストの文字コードを指定
+		request.setCharacterEncoding("UTF-8");
+		//パラメータを取得
+		String user_name = request.getParameter("user_name");
+		String user_pass = request.getParameter("user_pass");
+
+
+
+
+
+	}
 }

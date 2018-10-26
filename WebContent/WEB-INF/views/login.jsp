@@ -4,9 +4,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="css/style.css">
+<title>チームりんご ECサイト</title>
 </head>
 <body>
-
+<div class="wrapper">
+	<div class="content">
+		<h1>ログイン</h1>
+		<form action="/login" method="POST">
+		名前&emsp;&emsp;&emsp;&nbsp;&nbsp;
+		<input type="text" name="user_name"><br>
+		<br>
+		パスワード&emsp;
+		<input type="password" name="user_pass"><br>
+		<br>
+		<input type="submit" value="LOGIN">
+		</form>
+	</div>
+</div>
 </body>
 </html>
