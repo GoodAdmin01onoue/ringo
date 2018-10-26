@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class ShowDAO {
 
-	public int insert() {
+	public int insert(int proId) {
 
 	String url = "jdbc:mysql://localhost/ECRingo";
 	String id = "root";
@@ -17,6 +17,8 @@ public class ShowDAO {
 	Statement st=null;
 	ResultSet rs=null;
 
+	//ResultBeanをインスタンス化
+	ResultBean rb=new ResultBean();
 
 
 	try {
@@ -25,8 +27,20 @@ public class ShowDAO {
 		Class.forName("com.mysql.jdbc.Driver");
 		cnct = DriverManager.getConnection(url,id,pw);
 		st = cnct.createStatement();
-		String i ="SELECT FROM product where cat_id=proId";
+		String i ="SELECT FROM product where pro_cd=proId";
 		rs=st.executeQuery(i);
+
+		while(rb.next()) {
+
+
+
+			rb.getproName();
+			rb.getstockNo();
+			rb.getproPrice();
+			rb.getproImg();
+			rb.getproMsg();
+
+		}
 
 
 
