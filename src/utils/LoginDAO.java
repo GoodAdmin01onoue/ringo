@@ -6,15 +6,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import models.User;
+
 public class LoginDAO {
 
 
-	public void logincheck(String name, String password) {
+	public User logincheck(String name, String password) {
 
 		//DBに接続や、SQL文に実行に使用する変数の設定
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+
+		//Userインスタンスの生成
+		User user = new User();
 
 		try {
 
@@ -24,7 +29,7 @@ public class LoginDAO {
 			//DBへの接続
 			conn = DriverManager.getConnection(
 
-					"jdbc:mysql:localhost",
+					"jdbc:mysql://localhost/ECRingo",
 					"root",
 					"password"
 					);
@@ -43,11 +48,16 @@ public class LoginDAO {
 
 			while(rs.next()) {
 
-				String user_name = rs.getString("user_id");
+				//検索結果から、ID、名前、パスワードを取得
+				int user_id = rs.getInt("user_id");
+				String user_name = rs.getString("user_name");
 				String user_password = rs.getString("login_pw");
-				
-				
 
+
+				//userに検索結果をセット
+				user.setUserId(user_id);
+				user.setUserName(user_name);
+				user.setLoginPw(user_password);
 			}
 
 
@@ -70,7 +80,7 @@ public class LoginDAO {
 
 		}
 
-
+		return user;
 
 	}
 }

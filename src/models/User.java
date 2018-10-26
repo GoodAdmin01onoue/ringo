@@ -29,6 +29,10 @@ public class User implements Serializable {
 	public void setLoginPw(String loginPw) {
 		this.loginPw = loginPw;
 	}
+	public String getPassword() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 
 
 

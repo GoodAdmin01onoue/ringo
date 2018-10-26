@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%
+ String error = (String) request.getAttribute("error");
+ %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,9 +12,14 @@
 </head>
 <body>
 <div class="wrapper">
+	<%--<div class="error">
+		<% if(error.length() > 0) { %>
+			<p><%= error %></p>
+		<% } %>
+	</div> --%>
 	<div class="content">
 		<h1>ログイン</h1>
-		<form action="/login" method="POST">
+		<form action="login" method="POST">
 		名前&emsp;&emsp;&emsp;&nbsp;&nbsp;
 		<input type="text" name="user_name"><br>
 		<br>
