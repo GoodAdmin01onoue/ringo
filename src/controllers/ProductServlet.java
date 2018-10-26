@@ -15,10 +15,13 @@ public class ProductServlet extends HttpServlet {
 		// TODO 自動生成されたメソッド・スタブ
 
 
+
 		HttpSession session=req.getSession(false);
 		if(session==null) {
 
 			int proId=Integer.parseInt(req.getParameter("proId"));
+
+
 
 
 
