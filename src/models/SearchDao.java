@@ -5,17 +5,21 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchDao {
 
 	public static void main(String[] args) {}
 	
 	
-    public ProductBean getResult(String keyWord, String keyCat) {
+	/***
+	引数を検索条件にＤＢに問合せた結果をレコードごとに取得した値をListに格納し、
+	そのListを呼び出し元に返すメソッド
+	***/
+    public List getResult(String keyWord, String keyCat) {
 		
-    	ProductBean rb = new ProductBean();
-    	
-		
+    	//■引数を検索条件にDBに問い合わせする
 		String url = "jdbc:mysql://localhost/ECRingo";
 		String id = "root";
 		String pass = "password";
@@ -24,32 +28,29 @@ public class SearchDao {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		
+		List<ProductBean> products = new ArrayList<>();
+		
 		
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			conn = DriverManager.getConnection(url, id, pass);
-			
-			//if(keyWord != null) {
-				String query 
-				= "select category.pro_cd, product.pro_name, product.pro_price from product inner join category on product.cat_id = category.cat_id where category.cat_name = ? and product.pro_name = ?";
-				pst = conn.prepareStatement(query);
-				pst.setString(1, keyCat);
-				pst.setString(2, keyWord);
-				rs = pst.executeQuery();
-			//}
-			/*else {
-				String query = "select pro_cd, pro_name, pro_price from product where product = ?";
-				pst = conn.prepareStatement(query);
-				pst.setString(1, keyCat);
-				rs = pst.executeQuery();
-			}*/
-			
-			while(rs.next()) {
-			rb.setProCd(rs.getInt("pro_cd"));
-			rb.setProName(rs.getString("pro_name"));
-			rb.setProPrice(rs.getInt("pro_price"));
+			String query 
+			= "select category.pro_cd, product.pro_name, product.pro_price from product inner join category on product.cat_id = category.cat_id where category.cat_name = ? and product.pro_name = ?";
+			pst = conn.prepareStatement(query);
+			pst.setString(1, keyCat);
+			pst.setString(2, keyWord);
+			rs = pst.executeQuery();
+				
+			//■問合せた結果の値をレコードごとにインスタンス化したBeanプロパティに値を格納
+			//	インスタンス化されたBeanをListに格納
+				while(rs.next()) {
+				ProductBean product = new ProductBean();
+				product.setProCd(rs.getInt("pro_cd"));
+				product.setProName(rs.getString("pro_name"));
+				product.setProPrice(rs.getInt("pro_price"));
+				products.add(product);
 			}
 		}
 		catch(ClassNotFoundException ex) {
@@ -67,7 +68,9 @@ public class SearchDao {
 			catch(Exception ex) {}
 		}
 		
-		return rb;
+		//■インスタンス化したBeanを格納したListを
+		//　メソッドの呼び出し元に返す
+		return products;
 	}
 
 

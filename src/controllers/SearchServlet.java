@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,7 +22,9 @@ public class SearchServlet extends HttpServlet {
         super();
     }
     
-    
+    /***
+     * ログイン画面からセッションを継続し、検索画面に移すためのメソッド
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		if(session == null) {
@@ -32,6 +35,10 @@ public class SearchServlet extends HttpServlet {
 	}
 	
 	
+	/***
+	 * View(search.jsp)から検索条件の値をもらい、Model(SearchDao)でDB問い合わせ
+	 * した結果の値をView(search.jsp)に返すメソッド
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//セッションの継続
@@ -41,23 +48,23 @@ public class SearchServlet extends HttpServlet {
 		}
 		
 		//セッションが継続していれば以下の処理を行なう
-		//HTMLからの値をエンコーディング
-		request.setCharacterEncoding("UTF-8");
 		
-		//HTMLから値をもらう
+		//■Viewから検索条件の値を持ってくる
+		request.setCharacterEncoding("UTF-8");
 		String keyWord = request.getParameter("key");
 		String keyCat = request.getParameter("category");
 		
-		//JDBCに接続
-		//HTMLからもらった値を元に、DBに問い合わせ
+		//■ModelでDBに問い合わせする
 		SearchDao sd = new SearchDao();
-		ProductBean search = sd.getResult(keyWord, keyCat);
+		List<ProductBean> results = sd.getResult(keyWord, keyCat);
 		
-		//DBからの戻り値をリクエストオブジェクトに格納
-		request.setAttribute("pro_cd", search.getProCd());
-		request.setAttribute("cat_name", search.getCatName());
-		request.setAttribute("pro_price", search.getProPrice());
-				
+		//■Modelでの問合せ結果をリクエストオブジェクト経由でViewに返す
+		//　DBからの戻り値をリクエストオブジェクトに格納
+		for(ProductBean product: results) {
+		request.setAttribute("pro_cd", product.getProCd());
+		request.setAttribute("cat_name", product.getCatName());
+		request.setAttribute("pro_price", product.getProPrice());
+		}
 		//DBからの戻り値をView（search.jsp）にリクエストオブジェクト経由で渡す
 		RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
 		rd.forward(request, response);
