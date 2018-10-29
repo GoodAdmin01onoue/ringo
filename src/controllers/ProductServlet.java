@@ -32,11 +32,14 @@ public class ProductServlet extends HttpServlet {
 		//ShowDAOクラスをインスタンス化
 		ShowDAO sd = new ShowDAO();
 
-		sd.insert(proId);
+
+		ProductBean x=sd.insert(proId);
 
 
-		RequestDispatcher rd=req.getRequestDispatcher("product");
-		rd.forward=(req.resp);
+
+		req.setAttribute("resultbean",x);
+		RequestDispatcher rd=req.getRequestDispatcher("product.jsp");
+		rd.forward(req,resp);
 
 
 	}

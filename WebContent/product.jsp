@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="result" scope="request" class=""></jsp:useBean>
+<% ProductBean pb=(ProductBean)req.getAttribute("productbean");%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,31 +14,40 @@
 <table>
 <tr>
 <td>商品名</td>
-<td><jsp:getProperty name="" property=""></td>
+<td><%= pb.getproName() %></td>
 </tr>
 <tr>
 <td>カテゴリ</td>
-<td><jsp:getProperty name="" property=""></td>
+<td><%= pb.getcatName() %></td>
 </tr>
 <tr>
 <td>価格</td>
-<td><jsp:getProperty name="" property=""></td>
+<td><%= pb.proPrice() %></td>
 </tr>
 <tr>
 <td>在庫</td>
-<td><jsp:getProperty name="" property=""></td>
+<td><%= pb.stockNo() %></td>
 </tr>
 <tr>
 <td>商品紹介</td>
-<td><jsp:getProperty name="" property=""></td>
+<td><%= pb.proMsg() %></td>
 </tr>
 </table>
 
 <p>個数</p>
-<select name="kosuu"></select>
+<select name="kosuu" >
+<option value="stock">
 
-<input type="button" value="カートへ">
-<input type="button" value="戻る">
+<% for(int i=1;i<pb.stockNo();i++){ %>
+<%= i %>
+<% } %>
+
+</option>
+</select>
+
+<input type="button"  onclick="location.href'/cart'" value="カートへ">
+
+<input type="button"  onclick="location.href'/serch'" value="戻る">
 
 </body>
 </html>

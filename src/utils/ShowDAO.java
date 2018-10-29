@@ -8,7 +8,9 @@ import java.sql.Statement;
 
 public class ShowDAO {
 
-	public int insert(int proId) {
+	public ProductBean insert(int proId) {
+
+
 
 	String url = "jdbc:mysql://localhost/ECRingo";
 	String id = "root";
@@ -18,7 +20,7 @@ public class ShowDAO {
 	ResultSet rs=null;
 
 	//ResultBeanをインスタンス化
-	ResultBean rb=new ResultBean();
+	ProductBean pb=new ProductBean();
 
 
 	try {
@@ -30,15 +32,23 @@ public class ShowDAO {
 		String i ="SELECT FROM product where pro_cd=proId";
 		rs=st.executeQuery(i);
 
-		while(rb.next()) {
+		while(rs.next()) {
+
+		//productテーブルの値を取り出す
+		 String pro_name=rs.getString("pro_name");
+		 String cat_name=rs.getString("cat_name");
+		 int pro_price=rs.getInt(4);
+		 int stock_no=rs.getInt(3);
+		 String pro_msg=rs.getString("pro_msg");
+
+		 //ProductBeanからデータを格納
+		 pb.setproName(pro_name);
+		 pb.setcatName(cat_name);
+		 pb.setproPrice(pro_price);
+		 pb.setstockNo(stock_no);
+		 pb.proMsg(pro_msg);
 
 
-
-			rb.getproName();
-			rb.getstockNo();
-			rb.getproPrice();
-			rb.getproImg();
-			rb.getproMsg();
 
 		}
 
@@ -64,7 +74,7 @@ public class ShowDAO {
 
 		}catch(Exception ex) {}
 }
-	return 0;
+	return rb;
 }
 }
 
