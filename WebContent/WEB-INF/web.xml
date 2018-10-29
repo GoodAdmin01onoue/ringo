@@ -17,16 +17,14 @@
     <servlet-name>login</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
-
-<servlet>
-  	<servlet-name>product</servlet-name>
-  	<servlet-class>controllers.ProductServlet</servlet-class>
+  <servlet>
+    <servlet-name>product</servlet-name>
+    <servlet-class>controllers.ProductServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>product</servlet-name>
-  	<url-pattern>/product</url-pattern>
+    <servlet-name>product</servlet-name>
+    <url-pattern>/product</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <servlet-name>search</servlet-name>
     <servlet-class>controllers.SearchServlet</servlet-class>
