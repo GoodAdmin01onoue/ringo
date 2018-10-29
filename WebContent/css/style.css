@@ -3,3 +3,12 @@
 .content {
 	text-align:center
 }
+.error {
+	border: 1px solid ##FC3D3D;
+	border-radius: 5px;
+	background-color: #FE6060;
+	padding: 5px;
+	width: auto;
+	font-weight: bold;
+
+}
