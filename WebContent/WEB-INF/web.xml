@@ -17,8 +17,6 @@
     <servlet-name>login</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
-<<<<<<< HEAD
-=======
 
 <servlet>
   	<servlet-name>product</servlet-name>
@@ -29,5 +27,12 @@
   	<url-pattern>/product</url-pattern>
   </servlet-mapping>
 
->>>>>>> product
+  <servlet>
+    <servlet-name>search</servlet-name>
+    <servlet-class>controllers.SearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>search</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
 </web-app>
