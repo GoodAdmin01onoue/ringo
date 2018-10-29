@@ -54,5 +54,5 @@ public class ProductBean implements Serializable {
 	public void setProMsg(String proMsg) {
 		this.proMsg = proMsg;
 	}
-
+	
 }
