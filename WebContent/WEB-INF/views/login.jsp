@@ -12,11 +12,11 @@
 </head>
 <body>
 <div class="wrapper">
-	<%--<div class="error">
-		<% if(error.length() > 0) { %>
+	<% if(error != null && error.length() > 0) { %>
+		<div class="error">
 			<p><%= error %></p>
-		<% } %>
-	</div> --%>
+		</div>
+	<% } %>
 	<div class="content">
 		<h1>ログイン</h1>
 		<form action="login" method="POST">
