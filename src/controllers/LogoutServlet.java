@@ -10,31 +10,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class ThankServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public ThankServlet() {
+
+
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    //商品購入後、購入完了画面に飛ばすためだけのメソッド
+    //継続してるセッションがあればセッション終了するメソッド
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-		if(session == null) {
-			return;
+		if(session != null) {
+			session.invalidate();
+
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/logout.jsp");
+			rd.forward(request, response);
 		}
-
-
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/thank.jsp");
-		rd.forward(request, response);
 	}
 
-	/*
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/thank.jsp");
-		rd.forward(request, response);
-	}
-	*/
 
 }

@@ -33,4 +33,20 @@
     <servlet-name>search</servlet-name>
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>thank</servlet-name>
+    <servlet-class>controllers.ThankServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>thank</servlet-name>
+    <url-pattern>/thank</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>logout</servlet-name>
+    <servlet-class>controllers.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
 </web-app>

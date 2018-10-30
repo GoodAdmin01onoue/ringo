@@ -4,14 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>購入完了</title>
+<title>ログアウト完了</title>
 </head>
 <body>
-<h1>お買い上げありがとうございました！</h1>
-<br>
-
-<a href = "http://localhost:8080/EC_Ringo/search">→買い物を続ける</a><br><br>
-<a href = "http://localhost:8080/EC_Ringo/logout">→ログアウト</a>
-
+<h1>ログアウトしました。</h1><br>
+<a href = "http://localhost:8080/EC_Ringo/login">ログイン画面に戻る</a>
 </body>
 </html>
